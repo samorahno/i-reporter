@@ -2,7 +2,12 @@ import corruptioncases from '../models/incidents';
 
 class redFlagsController{
 
-  
+    static getAllRedflags(req, res){
+        res.send({
+            status: 200,
+            data: corruptioncases 
+        });
+    }
     static deleteARedFlag(req, res){
         res.send(corruptioncases);
     }
