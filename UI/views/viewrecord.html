@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>iReporter Dashboard</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/styleb.css" type="text/css">
+</head>
+<body>
+	<header>
+		<a href="dashboard.html"><span></span>iReporter</a>
+		
+		<a href="#" class="minimize_button" onclick="togle_nav_func()"><span><i class="fa fa-bars fa-1x"></i></span></a>
+	</header>
+	<div class="side-nav visible" id="togle_nav">
+		<nav>
+			<ul>
+				<li>
+					<a href="dashboard.html">
+						<span ><i class="fa fa-home fa-fw"></i></span>
+						<span>Home</span>
+					</a>
+				</li>
+				<li > 
+					<a href="create_record.html">
+						<span ><i class="fa fa-pencil-square"></i></span>
+						<span>Create Record</span>
+					</a>
+				</li>
+				<li >
+					<a href="viewprofile.html">
+						<span ><i class="fa fa-envelope"></i></span>
+						<span>View Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="../index.html">
+						<span ><i class="fa fa-power-off"></i></span>
+						<span>Logout</span>
+					</a>
+				</li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+		<div class="main-content">
+			<div class="title" >
+				<a href="dashboard.html">Home</a> / view record
+			</div>
+			
+			<div class="main">
+				<div class="widget formval">
+					<div class="title heado">Record Information</div>
+					<div class="widget_stat">
+						
+						<table class="usertable">
+							
+								<tr>
+									<th>Record Type</th>
+									<td>Red-Flag</td>
+								</tr>
+								<tr>
+									<th>Date Created</th>
+									<td>Nov-25-2018</td>
+								</tr>
+								<tr>
+									<th>Status</th>
+									<td>Under Review</td>
+								</tr>
+								<tr>
+									<th>Location (lat, lon)</th>
+									<td>453121, 3544555</td>
+								</tr>
+								<tr>
+									<th>Image(s)</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>Video(s)</th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>Comment</th>
+									<td>The record has to do with a money laundry act</td>
+								</tr>
+							
+						</table>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+	
+	
+	
+	<script src="../js/script.js"></script>
+</body>
+</html>
