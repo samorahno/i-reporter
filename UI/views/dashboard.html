@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>iReporter Dashboard</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/styleb.css" type="text/css">
+</head>
+<body>
+	<header>
+		<a href="dashboard.html"><span></span>iReporter</a>
+		
+		<a href="#" class="minimize_button" onclick="togle_nav_func()"><span><i class="fa fa-bars fa-1x"></i></span></a>
+	</header>
+	<div class="side-nav visible" id="togle_nav">
+		<nav>
+			<ul>
+				<li class="active">
+					<a href="dashboard.html">
+						<span ><i class="fa fa-home fa-fw"></i></span>
+						<span>Home</span>
+					</a>
+				</li>
+				<li> 
+					<a href="create_record.html">
+						<span ><i class="fa fa-pencil-square"></i></span>
+						<span>Create Record</span>
+					</a>
+				</li>
+				
+				<li>
+					<a href="viewprofile.html">
+						<span ><i class="fa fa-envelope"></i></span>
+						<span>View Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="../index.html">
+						<span ><i class="fa fa-power-off"></i></span>
+						<span>Logout</span>
+					</a>
+				</li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+		<div class="main-content">
+			<div class="title">
+				home /
+			</div>
+			
+			<div class="main">
+				<div class="widget">
+					<div class="title heado">Red-flag  <br/> Resolved</div>
+					<div class="widget_stat">
+						<div class="widget_stat1">
+						<i class="fa  fa-check-circle-o"></i>
+						</div>
+						<div class="widget_stat2">
+						5
+						</div>
+					</div>
+				</div>
+				<div class="widget">
+					<div class="title heado">Intervention Resolved</div>
+					<div class="widget_stat">
+						<div class="widget_stat1">
+						<i class="fa fa-book"></i>
+						</div>
+						<div class="widget_stat2">
+						8
+						</div>
+					</div>
+				</div>
+				<div class="widget">
+					<div class="title heado">Red-flag Under Investigation</div>
+					<div class="widget_stat">
+						<div class="widget_stat1">
+						<i class="fa fa-dot-circle-o"></i>
+						</div>
+						<div class="widget_stat2">
+						6
+						</div>
+					</div>
+				</div>
+				<div class="widget">
+					<div class="title heado">Intervention Investigation</div>
+					<div class="widget_stat">
+						<div class="widget_stat1">
+						<i class="fa fa-asterisk"></i>
+						</div>
+						<div class="widget_stat2">
+						6
+						</div>
+					</div>
+				</div>
+				<div class="widget">
+					<div class="title heado">Red-flag <br/> Rejected</div>
+					<div class="widget_stat">
+						<div class="widget_stat1">
+						<i class="fa fa-compress"></i>
+						</div>
+						<div class="widget_stat2">
+						6
+						</div>
+					</div>
+				</div>
+				<div class="widget">
+					<div class="title heado">Intervention Rejected</div>
+					<div class="widget_stat">
+						<div class="widget_stat1">
+						<i class="fa fa-user-times"></i>
+						</div>
+						<div class="widget_stat2">
+						4
+						</div>
+					</div>
+				</div>
+				
+				<div class="widget widget_table">
+					<div class="title heado">Records List</div>
+					<div class="widget_stat widget_stat_table">
+						<table>
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Type</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><a href="#">1</a></td>
+								<td>Red Flag</td>
+								<td>Rejected</td>
+								<td>
+									<span><a href="viewrecord.html"><i class="fa fa-eye"></i></a></span> | 
+									<span><a href="editrecord.html"><i class="fa fa-pencil-square"></i></a></span> | 
+									<span><a href="#"><i class="fa fa-trash"></i></a></span>
+								</td>
+							</tr>
+							<tr>
+								<td><a href="#">3</a></td>
+								<td>Intervention</td>
+								<td>Accepted</td>
+								<td>
+									<span><a href="viewrecord.html"><i class="fa fa-eye"></i></a></span> | 
+									<span><a href="editrecord.html"><i class="fa fa-pencil-square"></i></a></span> | 
+									<span><a href="#"><i class="fa fa-trash"></i></a></span>
+								</td>
+							</tr>
+							<tr>
+								<td><a href="#">4</a></td>
+								<td>Red Flag</td>
+								<td>Investigation</td>
+								<td>
+									<span><a href="viewrecord.html"><i class="fa fa-eye"></i></a></span> | 
+									<span><a href="editrecord.html"><i class="fa fa-pencil-square"></i></a></span> | 
+									<span><a href="#"><i class="fa fa-trash"></i></a></span>
+								</td>
+							</tr>
+							<tr>
+								<td><a href="#">5</a></td>
+								<td>Intervention</td>
+								<td>Accepted</td>
+								<td>
+									<span><a href="viewrecord.html"><i class="fa fa-eye"></i></a></span> | 
+									<span><a href="editrecord.html"><i class="fa fa-pencil-square"></i></a></span> | 
+									<span><a href="#"><i class="fa fa-trash"></i></a></span>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	
+	
+	
+	<script src="../js/script.js"></script>
+</body>
+</html>
