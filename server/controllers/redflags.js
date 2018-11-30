@@ -41,6 +41,7 @@ class redFlagsController{
             status: 404,
             message: 'The record with the given id was not found',
         });
+        return;
     } 
        res.send({
             status: 200,
@@ -58,6 +59,7 @@ class redFlagsController{
                 status: 404,
                 message: 'The record with the given id was not found',
             });
+            return;
         }
 
         // destructure corruptioncase
@@ -79,6 +81,32 @@ class redFlagsController{
         });
 
 
+    }
+
+    static deleteARedFlagById(req, res){
+        const {incident_id} = req.params;
+        const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id));
+        if(!corruptioncase){
+            res.status(404).send({
+                status: 404,
+                message: 'The record with the given id was not found',
+            });
+            return;
+        }
+
+        const index = corruptioncases.indexOf(corruptioncase);
+        const result = corruptioncases.splice(index, 1);
+        if(!result){
+            res.status(400).send({
+                status: 400,
+                message: 'An error occured. Try again later',
+            });
+            return;
+        }
+        res.send({
+            status: 200,
+            data: corruptioncase,
+        })
     }
     
 
