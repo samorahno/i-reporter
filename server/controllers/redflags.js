@@ -29,7 +29,22 @@ class redFlagsController{
         corruptioncases.push(redFlag);
         res.send({
             status: 200,
-            data: redFlag 
+            data: redFlag,
+        });
+    }
+
+    static getARedFlagById(req, res){
+        const {incident_id} = req.params;
+        const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id));
+    if(!corruptioncase){
+        res.status(404).send({
+            status: 404,
+            message: 'The record with the given id was not found',
+        });
+    } 
+       res.send({
+            status: 200,
+            data: corruptioncase,
         });
     }
 
