@@ -48,6 +48,38 @@ class redFlagsController{
         });
     }
 
+
+    static editARedFlagById(req, res){
+        const {incident_id} = req.params;
+        const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id));
+
+        if(!corruptioncase){
+            res.status(404).send({
+                status: 404,
+                message: 'The record with the given id was not found',
+            });
+        }
+
+        // destructure corruptioncase
+        /*let {title,
+                comment,
+                address,
+                culprits,
+                } = corruptioncase;*/
+         const dateObj = new Date();
+        corruptioncase.title = req.body.title;
+        corruptioncase.comment = req.body.comment;
+        corruptioncase.Address = req.body.address;
+        corruptioncase.culprits = req.body.culprits;
+        corruptioncase.editedon = `${dateObj.getFullYear()} - ${(dateObj.getMonth() + 1)} - ${dateObj.getDate()}`;
+
+        res.send({
+            status: 200,
+            data: corruptioncase,
+        });
+
+
+    }
     
 
 }

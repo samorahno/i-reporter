@@ -10,13 +10,17 @@ const {
     getAllRedflags,
     deleteARedFlag,
     createRedFlag,
-    getARedFlagById
-} = redFlagsController
+    getARedFlagById,
+    editARedFlagById,
+} = redFlagsController;
 
 router.get('/red-flags/', getAllRedflags);
 
 router.post('/red-flags/', validateCreateRedFlag, createRedFlag);
 
-router.get('/red-flags/:incident_id', getARedFlagById)
+router.get('/red-flags/:incident_id', getARedFlagById);
+
+router.put('/red-flags/:incident_id', validateCreateRedFlag, editARedFlagById);
+
 
 export default router;
