@@ -8,10 +8,7 @@ class redFlagsController{
             data: corruptioncases 
         });
     }
-    static deleteARedFlag(req, res){
-        res.send(corruptioncases);
-    }
-
+    
     static createRedFlag(req, res){
         const dateObj = new Date();
         const redFlag = { 
@@ -37,11 +34,10 @@ class redFlagsController{
         const {incident_id} = req.params;
         const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id));
     if(!corruptioncase){
-        res.status(404).send({
+        return res.status(404).send({
             status: 404,
             message: 'The record with the given id was not found',
         });
-        return;
     } 
        res.send({
             status: 200,
@@ -55,11 +51,10 @@ class redFlagsController{
         const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id));
 
         if(!corruptioncase){
-            res.status(404).send({
+            return res.status(404).send({
                 status: 404,
                 message: 'The record with the given id was not found',
             });
-            return;
         }
 
         // destructure corruptioncase
