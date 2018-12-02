@@ -4,26 +4,25 @@ import redFlagsController from '../controllers/redflags';
 
 
 const router = express.Router();
-const {validateCreateRedFlag} = validator;
+const { validateCreateRedFlag } = validator;
 
 const {
-    getAllRedflags,
-    deleteARedFlag,
-    createRedFlag,
-    getARedFlagById,
-    editARedFlagById,
-    deleteARedFlagById,
+  getAllRedflags,
+  createRedFlag,
+  getARedFlagById,
+  editARedFlagById,
+  deleteARedFlagById,
 } = redFlagsController;
 
-router.get('/red-flags/', getAllRedflags);
+router.get('/', getAllRedflags);
 
-router.post('/red-flags/', validateCreateRedFlag, createRedFlag);
+router.post('/', validateCreateRedFlag, createRedFlag);
 
-router.get('/red-flags/:incident_id', getARedFlagById);
+router.get('/:incident_id', getARedFlagById);
 
-router.put('/red-flags/:incident_id', validateCreateRedFlag, editARedFlagById);
+router.put('/:incident_id', validateCreateRedFlag, editARedFlagById);
 
-router.delete('/red-flags/:incident_id', deleteARedFlagById);
+router.delete('/:incident_id', deleteARedFlagById);
 
 
 export default router;

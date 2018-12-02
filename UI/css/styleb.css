@@ -358,3 +358,7 @@ button{
 	border-radius:6px;
 }
 
+.tablelink{
+	font-weight:bolder;
+	color:black;
+}

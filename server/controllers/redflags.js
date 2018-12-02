@@ -1,112 +1,107 @@
 import corruptioncases from '../models/incidents';
 
-class redFlagsController{
+class redFlagsController {
+  static getAllRedflags(req, res) {
+    res.send({
+      status: 200,
+      data: corruptioncases,
+    });
+  }
 
-    static getAllRedflags(req, res){
-        res.send({
-            status: 200,
-            data: corruptioncases 
-        });
+  static createRedFlag(req, res) {
+    const dateObj = new Date();
+    const redFlag = {
+      id: corruptioncases.length + 1,
+      type: 'red-flag',
+      title: req.body.title,
+      comment: req.body.comment,
+      address: req.body.address,
+      culprits: req.body.culprits,
+      status: 'new',
+      createdby: 1,
+      createdon: `${dateObj.getDate()}-${(dateObj.getMonth() + 1)}-${dateObj.getFullYear()}`,
+    };
+
+    corruptioncases.push(redFlag);
+    res.send({
+      status: 200,
+      data: {
+        id: redFlag.id,
+        message: 'Created red-flag record',
+      },
+    });
+  }
+
+  static getARedFlagById(req, res) {
+    const { incident_id } = req.params;
+    const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id, 10));
+    if (!corruptioncase) {
+      return res.status(404).send({
+        status: 404,
+        error: 'The record with the given id was not found',
+      });
     }
-    
-    static createRedFlag(req, res){
-        const dateObj = new Date();
-        const redFlag = { 
-            id: corruptioncases.length + 1,
-            title: req.body.title,
-            type: 'red-flag',
-            address: req.body.address,
-            comment: req.body.comment,
-            culprits: req.body.culprits,
-            status: 'draft',
-            createdby: 1,
-            createdon: `${dateObj.getFullYear()} - ${(dateObj.getMonth() + 1)} - ${dateObj.getDate()}`,
-        }
-        
-        corruptioncases.push(redFlag);
-        res.send({
-            status: 200,
-            data: redFlag,
-        });
-    }
-
-    static getARedFlagById(req, res){
-        const {incident_id} = req.params;
-        const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id));
-    if(!corruptioncase){
-        return res.status(404).send({
-            status: 404,
-            message: 'The record with the given id was not found',
-        });
-    } 
-       res.send({
-            status: 200,
-            data: corruptioncase,
-        });
-    }
+    res.send({
+      status: 200,
+      data: corruptioncase,
+    });
+  }
 
 
-    static editARedFlagById(req, res){
-        const {incident_id} = req.params;
-        const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id));
+  static editARedFlagById(req, res) {
+    const { incident_id } = req.params;
+    const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id, 10));
 
-        if(!corruptioncase){
-            return res.status(404).send({
-                status: 404,
-                message: 'The record with the given id was not found',
-            });
-        }
-
-        // destructure corruptioncase
-        /*let {title,
-                comment,
-                address,
-                culprits,
-                } = corruptioncase;*/
-         const dateObj = new Date();
-        corruptioncase.title = req.body.title;
-        corruptioncase.comment = req.body.comment;
-        corruptioncase.Address = req.body.address;
-        corruptioncase.culprits = req.body.culprits;
-        corruptioncase.editedon = `${dateObj.getFullYear()} - ${(dateObj.getMonth() + 1)} - ${dateObj.getDate()}`;
-
-        res.send({
-            status: 200,
-            data: corruptioncase,
-        });
-
-
+    if (!corruptioncase) {
+      return res.status(404).send({
+        status: 404,
+        error: 'The record with the given id was not found',
+      });
     }
 
-    static deleteARedFlagById(req, res){
-        const {incident_id} = req.params;
-        const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id));
-        if(!corruptioncase){
-            res.status(404).send({
-                status: 404,
-                message: 'The record with the given id was not found',
-            });
-            return;
-        }
+    const dateObj = new Date();
+    corruptioncase.title = req.body.title;
+    corruptioncase.comment = req.body.comment;
+    corruptioncase.Address = req.body.address;
+    corruptioncase.culprits = req.body.culprits;
+    corruptioncase.editedon = `${dateObj.getDate()}-${(dateObj.getMonth() + 1)}-${dateObj.getFullYear()}`;
 
-        const index = corruptioncases.indexOf(corruptioncase);
-        const result = corruptioncases.splice(index, 1);
-        if(!result){
-            res.status(400).send({
-                status: 400,
-                message: 'An error occured. Try again later',
-            });
-            return;
-        }
-        res.send({
-            status: 200,
-            data: corruptioncase,
-        })
+    res.send({
+      status: 200,
+      data: {
+        id: corruptioncase.id,
+        message: 'Updated red-flag record',
+      },
+    });
+  }
+
+  static deleteARedFlagById(req, res) {
+    const { incident_id } = req.params;
+    const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id, 10));
+    if (!corruptioncase) {
+      res.status(404).send({
+        status: 404,
+        error: 'The record with the given id was not found',
+      });
+      return;
     }
-    
 
+    const index = corruptioncases.indexOf(corruptioncase);
+    const result = corruptioncases.splice(index, 1);
+    if (!result) {
+      res.status(400).send({
+        status: 400,
+        error: 'An error occured. Try again later',
+      });
+      return;
+    }
+    res.send({
+      status: 200,
+      data: {
+        id: corruptioncase.id,
+        message: 'red-flag record has been deleted',
+      },
+    });
+  }
 }
-
-
-
 export default redFlagsController;
