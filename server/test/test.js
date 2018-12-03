@@ -80,3 +80,192 @@ describe('GET /red-flag/:incident_id/ for an existing record', () => {
       });
   });
 });
+
+describe('post /v1/api/red-flags', () => {
+  it('should return 200 if all post values are correct', (done) => {
+    chai.request(app)
+      .post('/api/v1/red-flags')
+      .send({
+        title: "A fraud in the yard",
+	      address: "28, adewale street",
+	      comment: "He squandled 40 billion",
+	      culprits: "Mr Nwadike"
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.have.property('status').eql(200);
+        expect(res.body.data).to.have.property('message').eql('Created red-flag record');
+        expect(res).to.have.status(200);
+        expect(res).to.not.redirect;
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('post /v1/api/red-flags', () => {
+  it('should return 400 error since the post title is empty', (done) => {
+    chai.request(app)
+      .post('/api/v1/red-flags')
+      .send({
+        title: "",
+	      address: "28, adewale street",
+	      comment: "He squandled 40 billion",
+	      culprits: "Mr Nwadike"
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.have.property('status').eql(400);
+        expect(res.body).to.have.property('error').eql('enter a title for incident');
+        expect(res).to.have.status(400);
+        expect(res).to.not.redirect;
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('post /v1/api/red-flags', () => {
+  it('should return 400 error since the post culprit is empty', (done) => {
+    chai.request(app)
+      .post('/api/v1/red-flags')
+      .send({
+        title: "The Fraud",
+	      address: "28, adewale street",
+	      comment: "He squandled 40 billion",
+	      culprits: ""
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.have.property('status').eql(400);
+        expect(res.body).to.have.property('error').eql('Enter culprits information');
+        expect(res).to.have.status(400);
+        expect(res).to.not.redirect;
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('post /v1/api/red-flags', () => {
+  it('should return 400 error since the post comment is empty', (done) => {
+    chai.request(app)
+      .post('/api/v1/red-flags')
+      .send({
+        title: "The Fraud",
+	      address: "28, adewale street",
+	      comment: "",
+	      culprits: "MR Eze"
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.have.property('status').eql(400);
+        expect(res.body).to.have.property('error').eql('Please enter a comment');
+        expect(res).to.have.status(400);
+        expect(res).to.not.redirect;
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('post /v1/api/red-flags', () => {
+  it('should return 400 error since the title lenght is less than 3', (done) => {
+    chai.request(app)
+      .post('/api/v1/red-flags')
+      .send({
+        title: "T",
+	      address: "28, adewale street",
+	      comment: "The Fraud happened in 2017",
+	      culprits: "MR Eze"
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.have.property('status').eql(400);
+        expect(res.body).to.have.property('error').eql('enter a title for incident');
+        expect(res).to.have.status(400);
+        expect(res).to.not.redirect;
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('DELETE /red-flag/:incident_id/ for a non-existing record', () => {
+  it('it should return a 404 status of record not found', (done) => {
+    chai.request(app)
+      .delete('/api/v1/red-flags/r5')
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body).to.have.property('status').eql(404);
+        expect(res.body).to.not.be.empty;      
+        expect(res.body).to.have.property('error').eql('The record with the given id was not found');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('DELETE /red-flag/:incident_id/ for an existing record', () => {
+  it('it should return a 200 OK status of record deleted successfully', (done) => {
+    chai.request(app)
+      .delete('/api/v1/red-flags/2')
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.not.be.empty;
+        expect(res.body).to.have.property('status').eql(200);
+        expect(res.body).to.have.property('data').which.is.an('object').and.has.property('message').eql('red-flag record has been deleted');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('PUT /red-flag/:incident_id/ for a non-existing record', () => {
+  it('it should return a 404 status of record not found', (done) => {
+    chai.request(app)
+      .put('/api/v1/red-flags/r5')
+      .send({
+        title: "The name is good",
+	      address: "28, adewale street",
+	      comment: "The Fraud happened in 2017",
+	      culprits: "MR Eze"
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body).to.have.property('status').eql(404);
+        expect(res.body).to.not.be.empty;      
+        expect(res.body).to.have.property('error').eql('The record with the given id was not found');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('PUT /red-flag/:incident_id/ for an existing record', () => {
+  it('it should return a 200 OK status of Edit Successful', (done) => {
+    chai.request(app)
+      .put('/api/v1/red-flags/1')
+      .send({
+        title: "The name is good",
+	      address: "28, adewale street",
+	      comment: "The Fraud happened in 2017",
+	      culprits: "MR Eze"
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.not.be.empty;
+        expect(res.body).to.have.property('status').eql(200);
+        expect(res.body).to.have.property('data').which.is.an('object').and.has.property('message').eql('Updated red-flag record');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});

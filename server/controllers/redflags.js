@@ -87,14 +87,7 @@ class redFlagsController {
     }
 
     const index = corruptioncases.indexOf(corruptioncase);
-    const result = corruptioncases.splice(index, 1);
-    if (!result) {
-      res.status(400).send({
-        status: 400,
-        error: 'An error occured. Try again later',
-      });
-      return;
-    }
+    corruptioncases.splice(index, 1);
     res.send({
       status: 200,
       data: {
