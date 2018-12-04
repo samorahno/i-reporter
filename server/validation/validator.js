@@ -1,4 +1,4 @@
-class createGeneralValidator {
+class Validator {
   static validateString(string) {
     if (!string || string === undefined || string.toString().trim() === '' || typeof string !== 'string') return false;
     if (string.length < 3 || string.length > 500) return false;
@@ -9,4 +9,4 @@ class createGeneralValidator {
   /* static validateEmail(string) {
   } */
 }
-export default createGeneralValidator;
+export default Validator;

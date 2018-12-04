@@ -7,7 +7,7 @@ i-Reporter enables citizens to bring any form of corruption to the notice of app
 - Users can  create Red-Flags or Intervention records
 - Users can view list of Red-Flags records
 - Users can edit their red-flag or intervention records
-- Users can delete their records
+- Users can delete their red-flag or intervention records
 
 # Templates
 UI templates are hosted on Github pages [here](https://samorahno.github.io/i-reporter/UI/)

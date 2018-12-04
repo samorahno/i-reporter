@@ -1,4 +1,4 @@
-import createGeneralValidator from './createGeneralValidator';
+import createGeneralValidator from './validator';
 
 const {
   validateString,
