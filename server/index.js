@@ -17,5 +17,4 @@ app.get('*', (req, res) => res.status(404).send({ message: 'Page not found. Plea
 const port = 3000 || process.env.port;
 app.listen(port, () => console.log(`app running on port ${port}`));
 
-
 export default app;
