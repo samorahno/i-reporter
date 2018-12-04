@@ -75,6 +75,39 @@ class redFlagsController {
     });
   }
 
+  static editARedFlagComment(req, res) {
+    const dateObj = new Date();
+    const { comment } = req.body;
+    const { incident_id } = req.params;
+    const keys = Object.keys(req.body);
+    const key = keys[0];
+    if (keys.length !== 1 || key !== 'comment') {
+      res.status(400).send({
+        status: 400,
+        error: 'sorry, Only the comment can be edited',
+      });
+      return;
+    }
+    const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id, 10));
+    if (!corruptioncase) {
+      res.status(404).send({
+        status: 404,
+        error: 'The record with the given id was not found',
+      });
+      return;
+    }
+    corruptioncase.comment = comment;
+    corruptioncase.editedon = `${dateObj.getDate()}-${(dateObj.getMonth() + 1)}-${dateObj.getFullYear()}`;
+
+    res.send({
+      status: 200,
+      data: {
+        id: corruptioncase.id,
+        message: 'Updated red-flag record comment',
+      },
+    });
+  }
+
   static deleteARedFlagById(req, res) {
     const { incident_id } = req.params;
     const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id, 10));

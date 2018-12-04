@@ -1,7 +1,9 @@
-import createGeneralValidator from './createGeneralValidator';
+import createGeneralValidator from './validator';
 
 const {
   validateString,
+  validateCommentString,
+  validateCommentLength,
 } = createGeneralValidator;
 
 export default class validator {
@@ -31,6 +33,26 @@ export default class validator {
         error: 'Please enter a comment',
       });
     }
+    return next();
+  }
+
+  static validateRedFlagComment(req, res, next) {
+    const {
+      comment,
+    } = req.body;
+    if (!validateCommentString(comment)) {
+      return res.status(400).send({
+        status: 400,
+        error: 'Please enter a comment',
+      });
+    }
+    if (!validateCommentLength(comment)) {
+      return res.status(400).send({
+        status: 400,
+        error: 'Comment Lenght is too short',
+      });
+    }
+
     return next();
   }
 }
