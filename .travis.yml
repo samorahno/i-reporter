@@ -6,10 +6,12 @@ node_js:
 cache:
   directories:
     - node_modules
-install:
-- npm install
+
+before_script:
+  - npm install
+
 script: 
-- npm test
+  - npm test
 
 after_success:
   - npm run coverage
