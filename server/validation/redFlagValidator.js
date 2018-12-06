@@ -12,8 +12,8 @@ export default class validator {
     const {
       title,
       comment,
-      location,
       culprits,
+      location,
     } = req.body;
     if (!validateString(title)) {
       return res.status(400).send({
@@ -30,11 +30,18 @@ export default class validator {
         });
       }
     }
-
-    if (comment.toString().trim() === '') {
+    
+    if (!location || !validateString(location)) {
       return res.status(400).send({
         status: 400,
-        error: 'Please enter a comment',
+        error: 'Please enter a Location',
+      });
+    }
+
+    if (!comment || !validateString(comment)) {
+      return res.status(400).send({
+        status: 400,
+        error: 'Please enter Comment',
       });
     }
     return next();
@@ -44,7 +51,7 @@ export default class validator {
     const {
       comment,
     } = req.body;
-    if (!validateCommentString(comment)) {
+    if (!comment || !validateString(comment)) {
       return res.status(400).send({
         status: 400,
         error: 'Please enter a comment',

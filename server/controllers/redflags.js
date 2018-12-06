@@ -25,10 +25,10 @@ class redFlagsController {
     corruptioncases.push(redFlag);
     res.status(201).send({
       status: 201,
-      data: {
+      data: [{
         id: redFlag.id,
         message: 'Created red-flag record',
-      },
+      }],
     });
   }
 
@@ -43,7 +43,7 @@ class redFlagsController {
     }
     res.send({
       status: 200,
-      data: corruptioncase,
+      data: [corruptioncase],
     });
   }
 
@@ -73,10 +73,10 @@ class redFlagsController {
 
     res.send({
       status: 200,
-      data: {
+      data: [{
         id: corruptioncase.id,
         message: 'Updated red-flag record comment',
-      },
+      }],
     });
   }
 
@@ -106,10 +106,10 @@ class redFlagsController {
 
     res.send({
       status: 200,
-      data: {
+      data: [{
         id: corruptioncase.id,
         message: 'Updated red-flag record’s location',
-      },
+      }],
     });
   }
 
@@ -128,10 +128,10 @@ class redFlagsController {
     corruptioncases.splice(index, 1);
     res.send({
       status: 200,
-      data: {
+      data: [{
         id: corruptioncase.id,
         message: 'red-flag record has been deleted',
-      },
+      }],
     });
   }
 }
