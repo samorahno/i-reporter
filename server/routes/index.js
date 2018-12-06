@@ -4,7 +4,7 @@ import redFlagsController from '../controllers/redflags';
 
 
 const router = express.Router();
-const { validateCreateRedFlag, validateRedFlagComment } = validator;
+const { validateCreateRedFlag, validateRedFlagComment, validateRedFlagAddress } = validator;
 
 const {
   getAllRedflags,
@@ -13,6 +13,7 @@ const {
   editARedFlagById,
   deleteARedFlagById,
   editARedFlagComment,
+  editARedFlagAddress,
 } = redFlagsController;
 
 router.get('/', getAllRedflags);
@@ -23,7 +24,10 @@ router.get('/:incident_id', getARedFlagById);
 
 router.put('/:incident_id', validateCreateRedFlag, editARedFlagById);
 
-router.put('/:incident_id/comment', validateRedFlagComment, editARedFlagComment);
+router.patch('/:incident_id/comment', validateRedFlagComment, editARedFlagComment);
+
+router.patch('/:incident_id/location', validateRedFlagAddress, editARedFlagAddress);
+
 
 router.delete('/:incident_id', deleteARedFlagById);
 

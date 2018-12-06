@@ -4,6 +4,7 @@ const {
   validateString,
   validateCommentString,
   validateCommentLength,
+  validateAddress,
 } = createGeneralValidator;
 
 export default class validator {
@@ -11,6 +12,7 @@ export default class validator {
     const {
       title,
       comment,
+      address,
       culprits,
     } = req.body;
     if (!validateString(title)) {
@@ -20,11 +22,20 @@ export default class validator {
       });
     }
 
-    if (!validateString(culprits)) {
+    if (!validateAddress(address)) {
       return res.status(400).send({
         status: 400,
-        error: 'Enter culprits information',
+        error: 'Enter Address',
       });
+    }
+
+    if (culprits) {
+      if (!validateString(culprits)) {
+        return res.status(400).send({
+          status: 400,
+          error: 'Enter Culprits Information',
+        });
+      }
     }
 
     if (comment.toString().trim() === '') {
@@ -53,6 +64,19 @@ export default class validator {
       });
     }
 
+    return next();
+  }
+
+  static validateRedFlagAddress(req, res, next) {
+    const {
+      address,
+    } = req.body;
+    if (!validateAddress(address)) {
+      return res.status(400).send({
+        status: 400,
+        error: 'Please enter a Location',
+      });
+    }
     return next();
   }
 }

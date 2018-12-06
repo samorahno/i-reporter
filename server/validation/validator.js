@@ -14,6 +14,12 @@ class Validator {
     if (string.length < 5 || string.length > 1500) return false;
     return true;
   }
+
+  static validateAddress(string) {
+    if (typeof string !== 'string') return false;
+    if (string.length < 5 || string.length > 350) return false;
+    return true;
+  }
   // validate email
   /* static validateEmail(string) {
   } */
