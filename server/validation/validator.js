@@ -15,7 +15,7 @@ class Validator {
     return true;
   }
 
-  static validateAddress(string) {
+  static validateLocation(string) {
     if (typeof string !== 'string') return false;
     if (string.length < 5 || string.length > 350) return false;
     return true;

@@ -87,7 +87,7 @@ describe('post /v1/api/red-flags', () => {
       .post('/api/v1/red-flags')
       .send({
         title: 'A fraud in the yard',
-	      address: '28, adewale street',
+	      location: '28, adewale street',
 	      comment: 'He squandled 40 billion',
 	      culprits: 'Mr Nwadike',
       })
@@ -110,7 +110,7 @@ describe('post /v1/api/red-flags', () => {
       .post('/api/v1/red-flags')
       .send({
         title: '',
-	      address: '28, adewale street',
+	      location: '28, adewale street',
 	      comment: 'He squandled 40 billion',
 	      culprits: 'Mr Nwadike',
       })
@@ -134,7 +134,7 @@ describe('post /v1/api/red-flags', () => {
       .post('/api/v1/red-flags')
       .send({
         title: 'The Fraud',
-	      address: '28, adewale street',
+	      location: '28, adewale street',
 	      comment: 'He squandled 40 billion',
 	      culprits: '',
       })
@@ -157,7 +157,7 @@ describe('post /v1/api/red-flags', () => {
       .post('/api/v1/red-flags')
       .send({
         title: 'The Fraud',
-	      address: '28, adewale street',
+	      location: '28, adewale street',
 	      comment: '',
 	      culprits: 'MR Eze',
       })
@@ -180,7 +180,7 @@ describe('post /v1/api/red-flags', () => {
       .post('/api/v1/red-flags')
       .send({
         title: 'T',
-        address: '28, adewale street',
+        location: '28, adewale street',
         comment: 'The Fraud happened in 2017',
         culprits: 'MR Eze',
       })
@@ -228,48 +228,6 @@ describe('DELETE /red-flag/:incident_id/ for an existing record', () => {
   });
 });
 
-describe('PUT /red-flag/:incident_id/ for a non-existing record', () => {
-  it('it should return a 404 status of record not found', (done) => {
-    chai.request(app)
-      .put('/api/v1/red-flags/r5')
-      .send({
-        title: 'The name is good',
-	      address: '28, adewale street',
-	      comment: 'The Fraud happened in 2017',
-	      culprits: 'MR Eze',
-      })
-      .end((err, res) => {
-        expect(res.status).to.equal(404);
-        expect(res.body).to.have.property('status').eql(404);
-        expect(res.body).to.not.be.empty;      
-        expect(res.body).to.have.property('error').eql('The record with the given id was not found');
-        expect(res.body).to.be.an('object');
-        done();
-      });
-  });
-});
-
-describe('PUT /red-flag/:incident_id/ for an existing record', () => {
-  it('it should return a 200 OK status of Edit Successful', (done) => {
-    chai.request(app)
-      .put('/api/v1/red-flags/1')
-      .send({
-        title: 'The name is good',
-	      address: '28, adewale street',
-	      comment: 'The Fraud happened in 2017',
-	      culprits: 'MR Eze',
-      })
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.headers;
-        expect(res.body).to.not.be.empty;
-        expect(res.body).to.have.property('status').eql(200);
-        expect(res.body).to.have.property('data').which.is.an('object').and.has.property('message').eql('Updated red-flag record');
-        expect(res.body).to.be.an('object');
-        done();
-      });
-  });
-});
 
 describe('PATCH /red-flag/:incident_id/comment for an existing record', () => {
   it('it should return a 200 OK status of Edit Successful', (done) => {
@@ -297,7 +255,7 @@ describe('PATCH /red-flag/:incident_id/comment for an existing record', () => {
       .send({
         comment: 'The Fraud happened in 2017',
         title: 'A big Fraud',
-        address: 'Igbejuleki',
+        location: 'Igbejuleki',
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -334,7 +292,7 @@ describe('PATCH /red-flag/:incident_id/location for an existing record', () => {
     chai.request(app)
       .patch('/api/v1/red-flags/1/location')
       .send({
-        address: '23 Adekola,VI',
+        location: '23 Adekola,VI',
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -349,11 +307,11 @@ describe('PATCH /red-flag/:incident_id/location for an existing record', () => {
 });
 
 describe('PATCH /red-flag/:incident_id/location for an existing record', () => {
-  it('it should return a 400 error since address is less than 3', (done) => {
+  it('it should return a 400 error since location is less than 3', (done) => {
     chai.request(app)
       .patch('/api/v1/red-flags/1/location')
       .send({
-        address: '23',
+        location: '23',
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -374,14 +332,14 @@ describe('PATCH /red-flag/:incident_id/location for an existing record', () => {
       .send({
         comment: 'The Fraud happened in 2017',
         title: 'A big Fraud',
-        address: 'Igbejuleki',
+        location: 'Igbejuleki',
       })
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.headers;
         expect(res.body).to.not.be.empty;
         expect(res.body).to.have.property('status').eql(400);
-        expect(res.body).to.have.property('error').eql('sorry, Only the address can be edited');
+        expect(res.body).to.have.property('error').eql('sorry, Only the location can be edited');
         expect(res.body).to.be.an('object');
         done();
       });
@@ -393,7 +351,7 @@ describe('PATCH /red-flag/:incident_id/location for a non-existing record', () =
     chai.request(app)
       .patch('/api/v1/red-flags/g1/location')
       .send({
-	      address: 'Mokola, Ibadan',
+	      location: 'Mokola, Ibadan',
       })
       .end((err, res) => {
         expect(res.status).to.equal(404);

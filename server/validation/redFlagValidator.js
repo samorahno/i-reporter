@@ -4,7 +4,7 @@ const {
   validateString,
   validateCommentString,
   validateCommentLength,
-  validateAddress,
+  validateLocation,
 } = createGeneralValidator;
 
 export default class validator {
@@ -12,7 +12,7 @@ export default class validator {
     const {
       title,
       comment,
-      address,
+      location,
       culprits,
     } = req.body;
     if (!validateString(title)) {
@@ -60,11 +60,11 @@ export default class validator {
     return next();
   }
 
-  static validateRedFlagAddress(req, res, next) {
+  static validateRedFlagLocation(req, res, next) {
     const {
-      address,
+      location,
     } = req.body;
-    if (!validateAddress(address)) {
+    if (!validateLocation(location)) {
       return res.status(400).send({
         status: 400,
         error: 'Please enter a Location',

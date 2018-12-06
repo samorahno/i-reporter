@@ -15,7 +15,7 @@ class redFlagsController {
       type: 'red-flag',
       title: req.body.title,
       comment: req.body.comment,
-      address: req.body.address,
+      location: req.body.location,
       culprits: req.body.culprits || '',
       status: 'new',
       createdby: 1,
@@ -44,34 +44,6 @@ class redFlagsController {
     res.send({
       status: 200,
       data: corruptioncase,
-    });
-  }
-
-
-  static editARedFlagById(req, res) {
-    const { incident_id } = req.params;
-    const corruptioncase = corruptioncases.find(c => c.id === parseInt(incident_id, 10));
-
-    if (!corruptioncase) {
-      return res.status(404).send({
-        status: 404,
-        error: 'The record with the given id was not found',
-      });
-    }
-
-    const dateObj = new Date();
-    corruptioncase.title = req.body.title;
-    corruptioncase.comment = req.body.comment;
-    corruptioncase.Address = req.body.address;
-    corruptioncase.culprits = req.body.culprits;
-    corruptioncase.editedon = `${dateObj.getDate()}-${(dateObj.getMonth() + 1)}-${dateObj.getFullYear()}`;
-
-    res.send({
-      status: 200,
-      data: {
-        id: corruptioncase.id,
-        message: 'Updated red-flag record',
-      },
     });
   }
 
@@ -108,16 +80,16 @@ class redFlagsController {
     });
   }
 
-  static editARedFlagAddress(req, res) {
+  static editARedFlagLocation(req, res) {
     const dateObj = new Date();
-    const { address } = req.body;
+    const { location } = req.body;
     const { incident_id } = req.params;
     const keys = Object.keys(req.body);
     const key = keys[0];
-    if (keys.length !== 1 || key !== 'address') {
+    if (keys.length !== 1 || key !== 'location') {
       res.status(400).send({
         status: 400,
-        error: 'sorry, Only the address can be edited',
+        error: 'sorry, Only the location can be edited',
       });
       return;
     }
@@ -129,7 +101,7 @@ class redFlagsController {
       });
       return;
     }
-    corruptioncase.address = address;
+    corruptioncase.location = location;
     corruptioncase.editedon = `${dateObj.getDate()}-${(dateObj.getMonth() + 1)}-${dateObj.getFullYear()}`;
 
     res.send({
