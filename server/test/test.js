@@ -86,10 +86,10 @@ describe('post /v1/api/red-flags', () => {
     chai.request(app)
       .post('/api/v1/red-flags')
       .send({
-        title: "A fraud in the yard",
-	      address: "28, adewale street",
-	      comment: "He squandled 40 billion",
-	      culprits: "Mr Nwadike"
+        title: 'A fraud in the yard',
+	      address: '28, adewale street',
+	      comment: 'He squandled 40 billion',
+	      culprits: 'Mr Nwadike',
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -109,10 +109,10 @@ describe('post /v1/api/red-flags', () => {
     chai.request(app)
       .post('/api/v1/red-flags')
       .send({
-        title: "",
-	      address: "28, adewale street",
-	      comment: "He squandled 40 billion",
-	      culprits: "Mr Nwadike"
+        title: '',
+	      address: '28, adewale street',
+	      comment: 'He squandled 40 billion',
+	      culprits: 'Mr Nwadike',
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -127,22 +127,23 @@ describe('post /v1/api/red-flags', () => {
   });
 });
 
+
 describe('post /v1/api/red-flags', () => {
-  it('should return 400 error since the post culprit is empty', (done) => {
+  it('should return a 200 OK if the post culprit is empty', (done) => {
     chai.request(app)
       .post('/api/v1/red-flags')
       .send({
-        title: "The Fraud",
-	      address: "28, adewale street",
-	      comment: "He squandled 40 billion",
-	      culprits: ""
+        title: 'The Fraud',
+	      address: '28, adewale street',
+	      comment: 'He squandled 40 billion',
+	      culprits: '',
       })
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.headers;
-        expect(res.body).to.have.property('status').eql(400);
-        expect(res.body).to.have.property('error').eql('Enter culprits information');
-        expect(res).to.have.status(400);
+        expect(res.body).to.have.property('status').eql(200);
+        expect(res.body.data).to.have.property('message').eql('Created red-flag record');
+        expect(res).to.have.status(200);
         expect(res).to.not.redirect;
         expect(res.body).to.be.an('object');
         done();
@@ -155,10 +156,10 @@ describe('post /v1/api/red-flags', () => {
     chai.request(app)
       .post('/api/v1/red-flags')
       .send({
-        title: "The Fraud",
-	      address: "28, adewale street",
-	      comment: "",
-	      culprits: "MR Eze"
+        title: 'The Fraud',
+	      address: '28, adewale street',
+	      comment: '',
+	      culprits: 'MR Eze',
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -178,10 +179,10 @@ describe('post /v1/api/red-flags', () => {
     chai.request(app)
       .post('/api/v1/red-flags')
       .send({
-        title: "T",
-	      address: "28, adewale street",
-	      comment: "The Fraud happened in 2017",
-	      culprits: "MR Eze"
+        title: 'T',
+        address: '28, adewale street',
+        comment: 'The Fraud happened in 2017',
+        culprits: 'MR Eze',
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -203,7 +204,7 @@ describe('DELETE /red-flag/:incident_id/ for a non-existing record', () => {
       .end((err, res) => {
         expect(res.status).to.equal(404);
         expect(res.body).to.have.property('status').eql(404);
-        expect(res.body).to.not.be.empty;      
+        expect(res.body).to.not.be.empty;
         expect(res.body).to.have.property('error').eql('The record with the given id was not found');
         expect(res.body).to.be.an('object');
         done();
@@ -232,10 +233,10 @@ describe('PUT /red-flag/:incident_id/ for a non-existing record', () => {
     chai.request(app)
       .put('/api/v1/red-flags/r5')
       .send({
-        title: "The name is good",
-	      address: "28, adewale street",
-	      comment: "The Fraud happened in 2017",
-	      culprits: "MR Eze"
+        title: 'The name is good',
+	      address: '28, adewale street',
+	      comment: 'The Fraud happened in 2017',
+	      culprits: 'MR Eze',
       })
       .end((err, res) => {
         expect(res.status).to.equal(404);
@@ -253,10 +254,10 @@ describe('PUT /red-flag/:incident_id/ for an existing record', () => {
     chai.request(app)
       .put('/api/v1/red-flags/1')
       .send({
-        title: "The name is good",
-	      address: "28, adewale street",
-	      comment: "The Fraud happened in 2017",
-	      culprits: "MR Eze"
+        title: 'The name is good',
+	      address: '28, adewale street',
+	      comment: 'The Fraud happened in 2017',
+	      culprits: 'MR Eze',
       })
       .end((err, res) => {
         expect(err).to.be.null;
@@ -269,3 +270,139 @@ describe('PUT /red-flag/:incident_id/ for an existing record', () => {
       });
   });
 });
+
+describe('PATCH /red-flag/:incident_id/comment for an existing record', () => {
+  it('it should return a 200 OK status of Edit Successful', (done) => {
+    chai.request(app)
+      .patch('/api/v1/red-flags/1/comment')
+      .send({
+        comment: 'The Fraud happened in 2017',
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.not.be.empty;
+        expect(res.body).to.have.property('status').eql(200);
+        expect(res.body).to.have.property('data').which.is.an('object').and.has.property('message').eql('Updated red-flag record comment');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('PATCH /red-flag/:incident_id/comment for an existing record', () => {
+  it('it should return a 400 error since other fields was included in body', (done) => {
+    chai.request(app)
+      .patch('/api/v1/red-flags/1/comment')
+      .send({
+        comment: 'The Fraud happened in 2017',
+        title: 'A big Fraud',
+        address: 'Igbejuleki',
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.not.be.empty;
+        expect(res.body).to.have.property('status').eql(400);
+        expect(res.body).to.have.property('error').eql('sorry, Only the comment can be edited');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('PATCH /red-flag/:incident_id/comment for a non-existing record', () => {
+  it('it should return a 404 status of record not found', (done) => {
+    chai.request(app)
+      .patch('/api/v1/red-flags/g1/comment')
+      .send({
+	      comment: 'The Fraud happened in 2017',
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body).to.have.property('status').eql(404);
+        expect(res.body).to.not.be.empty;      
+        expect(res.body).to.have.property('error').eql('The record with the given id was not found');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('PATCH /red-flag/:incident_id/location for an existing record', () => {
+  it('it should return a 200 OK status of Edit Successful', (done) => {
+    chai.request(app)
+      .patch('/api/v1/red-flags/1/location')
+      .send({
+        address: '23 Adekola,VI',
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.not.be.empty;
+        expect(res.body).to.have.property('status').eql(200);
+        expect(res.body).to.have.property('data').which.is.an('object').and.has.property('message').eql('Updated red-flag record’s location');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('PATCH /red-flag/:incident_id/location for an existing record', () => {
+  it('it should return a 400 error since address is less than 3', (done) => {
+    chai.request(app)
+      .patch('/api/v1/red-flags/1/location')
+      .send({
+        address: '23',
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.not.be.empty;
+        expect(res.body).to.have.property('status').eql(400);
+        expect(res.body).to.have.property('error').eql('Please enter a Location');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('PATCH /red-flag/:incident_id/location for an existing record', () => {
+  it('it should return a 400 error since other fields were included in body', (done) => {
+    chai.request(app)
+      .patch('/api/v1/red-flags/1/location')
+      .send({
+        comment: 'The Fraud happened in 2017',
+        title: 'A big Fraud',
+        address: 'Igbejuleki',
+      })
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.headers;
+        expect(res.body).to.not.be.empty;
+        expect(res.body).to.have.property('status').eql(400);
+        expect(res.body).to.have.property('error').eql('sorry, Only the address can be edited');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+
+describe('PATCH /red-flag/:incident_id/location for a non-existing record', () => {
+  it('it should return a 404 status of record not found', (done) => {
+    chai.request(app)
+      .patch('/api/v1/red-flags/g1/location')
+      .send({
+	      address: 'Mokola, Ibadan',
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body).to.have.property('status').eql(404);
+        expect(res.body).to.not.be.empty;      
+        expect(res.body).to.have.property('error').eql('The record with the given id was not found');
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+

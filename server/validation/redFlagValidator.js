@@ -22,13 +22,6 @@ export default class validator {
       });
     }
 
-    if (!validateAddress(address)) {
-      return res.status(400).send({
-        status: 400,
-        error: 'Enter Address',
-      });
-    }
-
     if (culprits) {
       if (!validateString(culprits)) {
         return res.status(400).send({
