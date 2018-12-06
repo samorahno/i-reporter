@@ -23,8 +23,8 @@ class redFlagsController {
     };
 
     corruptioncases.push(redFlag);
-    res.send({
-      status: 200,
+    res.status(201).send({
+      status: 201,
       data: {
         id: redFlag.id,
         message: 'Created red-flag record',

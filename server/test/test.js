@@ -82,7 +82,7 @@ describe('GET /red-flag/:incident_id/ for an existing record', () => {
 });
 
 describe('post /v1/api/red-flags', () => {
-  it('should return 200 if all post values are correct', (done) => {
+  it('should return 201 if all post values are correct', (done) => {
     chai.request(app)
       .post('/api/v1/red-flags')
       .send({
@@ -94,9 +94,9 @@ describe('post /v1/api/red-flags', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.headers;
-        expect(res.body).to.have.property('status').eql(200);
+        expect(res.body).to.have.property('status').eql(201);
         expect(res.body.data).to.have.property('message').eql('Created red-flag record');
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(201);
         expect(res).to.not.redirect;
         expect(res.body).to.be.an('object');
         done();
@@ -129,7 +129,7 @@ describe('post /v1/api/red-flags', () => {
 
 
 describe('post /v1/api/red-flags', () => {
-  it('should return a 200 OK if the post culprit is empty', (done) => {
+  it('should return a 201 OK if the post culprit is empty', (done) => {
     chai.request(app)
       .post('/api/v1/red-flags')
       .send({
@@ -141,9 +141,9 @@ describe('post /v1/api/red-flags', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.headers;
-        expect(res.body).to.have.property('status').eql(200);
+        expect(res.body).to.have.property('status').eql(201);
         expect(res.body.data).to.have.property('message').eql('Created red-flag record');
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(201);
         expect(res).to.not.redirect;
         expect(res.body).to.be.an('object');
         done();
