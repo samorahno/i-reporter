@@ -241,7 +241,7 @@ p{
 
 .footer1{
 	height:auto; 
-	position:fixed;
+	/*position:fixed;*/
 	width:100%; 
 	padding:10px; 
 	background-color:#35475e;
@@ -337,4 +337,12 @@ p{
 	.td1{
 		padding-left:20px;
 	}
+}
+
+
+.tbl1{
+	padding-left:120px;
+}
+.tbl2{
+	padding-right:70px;
 }
