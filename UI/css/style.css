@@ -14,6 +14,7 @@ body{
 body a{
 	text-decoration:none;
 	
+	
 }
 
 header{
@@ -169,7 +170,7 @@ p{
 
 #showcase.grid{
 	color:black; 
-	height:510px;
+	height:600px;
 }
 
 #showcase h1{
@@ -241,7 +242,7 @@ p{
 
 .footer1{
 	height:auto; 
-	position:fixed;
+	/*position:fixed;*/
 	width:100%; 
 	padding:10px; 
 	background-color:#35475e;
