@@ -1,8 +1,9 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import redFlagsRoute from './routes/index';
 
 const app = express();
-
+dotenv.config();
 app.use(express.json());
 
 app.get('/api/v1', (req, res) => res.status(200).send({

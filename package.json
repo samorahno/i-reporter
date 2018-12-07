@@ -6,7 +6,7 @@
   "scripts": {
     "server": "node server/index.js",
     "dev": "node --require babel-register server/index.js",
-    "start": "node build/index.js",
+    "start": "node --require babel-register server/index.js",
     "test": " nyc ---reporter=html --reporter=text mocha --timeout 10000 --exit --require babel-register server/test/*",
     "coverage": "nyc report ---reporter=text-lcov | coveralls",
     "start:prod": "node build/server/index.js",
