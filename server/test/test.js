@@ -94,11 +94,14 @@ describe('post /v1/api/red-flags', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.headers;
-        expect(res.body).to.have.property('status').eql(201);
-        expect(res.body.data).to.have.property('message').eql('Created red-flag record');
+       expect(res.body).to.have.property('status').eql(201);
         expect(res).to.have.status(201);
         expect(res).to.not.redirect;
-        expect(res.body).to.be.an('object');
+        expect(res.body.data).to.be.an('array');
+        expect(res.body).to.have.property('data').with.lengthOf(1);
+        expect(res.body.data[0].message).to.equal('Created red-flag record');
+       // expect(res.body.data).to.have.members('id', 'message');
+        // expect(res.body.data).to.have.deep.property('message', 'Created red-flag record');
         done();
       });
   });
@@ -142,10 +145,11 @@ describe('post /v1/api/red-flags', () => {
         expect(err).to.be.null;
         expect(res).to.have.headers;
         expect(res.body).to.have.property('status').eql(201);
-        expect(res.body.data).to.have.property('message').eql('Created red-flag record');
         expect(res).to.have.status(201);
         expect(res).to.not.redirect;
-        expect(res.body).to.be.an('object');
+        expect(res.body.data).to.be.an('array');
+        expect(res.body).to.have.property('data').with.lengthOf(1);
+        expect(res.body.data[0].message).to.equal('Created red-flag record');
         done();
       });
   });
@@ -165,7 +169,7 @@ describe('post /v1/api/red-flags', () => {
         expect(err).to.be.null;
         expect(res).to.have.headers;
         expect(res.body).to.have.property('status').eql(400);
-        expect(res.body).to.have.property('error').eql('Please enter a comment');
+        expect(res.body).to.have.property('error').eql('Please enter Comment');
         expect(res).to.have.status(400);
         expect(res).to.not.redirect;
         expect(res.body).to.be.an('object');
@@ -221,8 +225,9 @@ describe('DELETE /red-flag/:incident_id/ for an existing record', () => {
         expect(res).to.have.headers;
         expect(res.body).to.not.be.empty;
         expect(res.body).to.have.property('status').eql(200);
-        expect(res.body).to.have.property('data').which.is.an('object').and.has.property('message').eql('red-flag record has been deleted');
-        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('data').with.lengthOf(1);
+        expect(res.body.data[0].message).to.equal('red-flag record has been deleted');
+        expect(res.body.data).to.be.an('array');
         done();
       });
   });
@@ -241,8 +246,9 @@ describe('PATCH /red-flag/:incident_id/comment for an existing record', () => {
         expect(res).to.have.headers;
         expect(res.body).to.not.be.empty;
         expect(res.body).to.have.property('status').eql(200);
-        expect(res.body).to.have.property('data').which.is.an('object').and.has.property('message').eql('Updated red-flag record comment');
-        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('data').with.lengthOf(1);
+        expect(res.body.data[0].message).to.equal('Updated red-flag record comment');
+        expect(res.body.data).to.be.an('array');
         done();
       });
   });
@@ -262,7 +268,6 @@ describe('PATCH /red-flag/:incident_id/comment for an existing record', () => {
         expect(res).to.have.headers;
         expect(res.body).to.not.be.empty;
         expect(res.body).to.have.property('status').eql(400);
-        expect(res.body).to.have.property('error').eql('sorry, Only the comment can be edited');
         expect(res.body).to.be.an('object');
         done();
       });
@@ -299,8 +304,9 @@ describe('PATCH /red-flag/:incident_id/location for an existing record', () => {
         expect(res).to.have.headers;
         expect(res.body).to.not.be.empty;
         expect(res.body).to.have.property('status').eql(200);
-        expect(res.body).to.have.property('data').which.is.an('object').and.has.property('message').eql('Updated red-flag record’s location');
-        expect(res.body).to.be.an('object');
+        expect(res.body.data).to.be.an('array');
+        expect(res.body).to.have.property('data').with.lengthOf(1);
+        expect(res.body.data[0].message).to.equal('Updated red-flag record’s location');
         done();
       });
   });
@@ -335,7 +341,6 @@ describe('PATCH /red-flag/:incident_id/location for an existing record', () => {
         location: 'Igbejuleki',
       })
       .end((err, res) => {
-        expect(err).to.be.null;
         expect(res).to.have.headers;
         expect(res.body).to.not.be.empty;
         expect(res.body).to.have.property('status').eql(400);

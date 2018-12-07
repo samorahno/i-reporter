@@ -71,6 +71,7 @@ class redFlagsController {
     corruptioncase.comment = comment;
     corruptioncase.editedon = `${dateObj.getDate()}-${(dateObj.getMonth() + 1)}-${dateObj.getFullYear()}`;
 
+
     res.send({
       status: 200,
       data: [{
