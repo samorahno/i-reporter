@@ -241,7 +241,7 @@ p{
 
 .footer1{
 	height:auto; 
-	/*position:fixed;*/
+	position:fixed;
 	width:100%; 
 	padding:10px; 
 	background-color:#35475e;
