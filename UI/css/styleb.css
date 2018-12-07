@@ -141,8 +141,9 @@ header a.minimize_button{
 		display:block;
 	}
 	.side-nav{
-		width:200px;
-		height:auto;
+		width:195px;
+		height:50%;
+		margin-top:100px;
 	}
 	.side-nav ul li {
 		text-align:left;
@@ -159,7 +160,7 @@ header a.minimize_button{
 	
 	.main-content {
 		margin-left: 195px;
-		height:auto;
+		height:800px;
 		background-color:#d5dae5;
 	}
 	
@@ -228,7 +229,7 @@ header a.minimize_button{
 }
 footer{
 
-	background-color: #5f9ea0;
+	background-color: #35475e;
 	border-bottom: 1px solid #b8bec9;
 	padding: 10px 20px;
 	font-weight: 700;
@@ -237,6 +238,7 @@ footer{
 	width:100%;
 	text-align:center;
 	margin-bottom:0;
+	
 }
 
 
