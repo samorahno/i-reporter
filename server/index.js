@@ -14,7 +14,7 @@ app.get('/api/v1', (req, res) => res.status(200).send({
 app.use('/api/v1/red-flags', redFlagsRoute);
 
 app.get('*', (req, res) => res.status(404).send({ message: 'Page not found. Please visit /api/v1' }));
-const port = 3000 || process.env.port;
+const port = process.env.port || 3000;
 app.listen(port, () => console.log(`app running on port ${port}`));
 
 
