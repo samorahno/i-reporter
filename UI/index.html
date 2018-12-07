@@ -8,47 +8,109 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
-<body style="text-align:center;">
+<body>
+<div class="header1">
+          <a href="index.html">iReporter</a>  
+ </div> 
     <div id="showcase" class="grid">
-		<div class="bg-image">
-            
-        </div>  
-		<h1>Welcome to iReporter</h1>
-		<p>Be among the citizens that will help reduce corruption in Africa</p>
-		<a href="views/login.html" class="btn2">Login</a> <a href="views/signup.html" class="btn2" >Sign Up</a>
+		 
+		<h1 class="white">Welcome to iReporter</h1>
+		<p class="white">Be among the citizens that will help reduce corruption in Africa</p>
+		<a href="#open-modal" class="btn2">Login</a> <a href="#open-modal2" class="btn2" >Sign Up</a>
+		
+		<div class="grid-body" >
+			<p class="grid-p">
+				<p>iReporter is an app that enables any citizen to bring any form of corruption to the notice of appropriate authorities and the general public.
+				This app also gives the ability to give report on things that needs government intervention.</p>
+			</p>
+		</div>
+		
+		
     </div>
-    <main id="main">
-		<section class="grid" id="section-a">
-			<div class="content-wrap">
-				<h2 class="content-title">About iReporter</h2>
-				<p>
-					iReporter is an app that enables any citizen to bring any form of corruption to the notice of appropriate <br/> authorities and the general public.  This app also gives the ability to give report on things that needs government intervention.
-					
-				</p>
-			</div>
-		</section>
-		
-		<!--section b-->
-		<section  id="section-b"> 
-			<ul>
-				<li>
-					<div class="card">
-						<img src="images/h2.JPEG" alt="first image" class="imghome"/>
-						<div class="card-content">
-							<h3 class="card-title">Contact Us</h3>
-							<p><i class="fa fa-phone"></i> : +2348060955366 <br><br/> <i class="fa fa-map-marker"></i> : 28, Adewale Street, Victoria Island, Lagos, Nigeria <br/><br/> <i class="fa fa-envelope"></i> : samabos007@gmail.com </p>
-						</div>
-					</div>
-				</li>
-				
-			</ul>
-		</section>
-		
-		
-	</main>
 	
-	<footer id="main-footer" class="grid">
-		<div>iReporter | Project by Abosede Samson &copy; 2018</div>
+    
+	
+	<footer class="footer1">
+		<table class="footer-table">
+			<tr>
+				<td style="padding-left:120px;"><span class="footer-td">
+					<p><i class="fa fa-phone"></i> : +2348060955366 <br> <i class="fa fa-map-marker"></i> : 28, Adewale Street, Victoria Island, Lagos, Nigeria <br><i class="fa fa-envelope"></i> : samabos007@gmail.com </p>
+				</td>
+				<td style="padding-right:70px;"><span class="footer-td2">iReporter | by Abosede Samson &copy; 2018</span></td>
+			</tr>
+			
+		</table>
+	
 	</footer>
+	
+	
+	
+
+
 </body>
+
+<!-- Modal 1-->
+<div id="open-modal" class="modal-window" style="text-align:center;">
+  <div>
+    
+    <div>
+	<a href="#modal-close" title="Close" class="modal-close">close &times;</a>
+		<form action="views/dashboard.html" method="POST" class="form-modal">
+	<h1>iReporter Login</h1>
+     <div class="input-group">
+            
+         <label>Username</label>
+         <input type="text" name="fname" placeholder="Enter Email or Phone Number" required>
+         
+     </div>
+     <div class="input-group">
+            <label>Password</label>
+            <input type="password" name="lname" placeholder="Enter Password" required>
+    </div>
+    
+    <div class="input-group">
+            <button type="submit" name="submit" class="btn">Login</button>
+    </div>
+
+ </form>
+	</div>
+  </div>
+</div>
+<!-- /Modal 1-->
+
+<!-- Modal 2-->
+<div id="open-modal2" class="modal-window" style="overflow:scroll;">
+  <div>
+    <a href="#modal-close2" title="Close" class="modal-close">close &times;</a>
+    <h1>iReporter Signup</h1>
+		<form action="views/dashboard.html" class="form-modal" method="POST">
+     <div class="input-group">
+         <label>Full Name</label>
+         <input type="text" name="fullname" placeholder="Enter Full Name" required>
+        
+     </div>
+    <div class="input-group">
+            <label>E-mail</label>
+            <input type="email" name="email" placeholder="Enter E-mail" required>
+    </div>
+    <div class="input-group">
+            <label>Phone Number</label>
+            <input type="text" name="pnumber" placeholder="Enter Phone Number" required>
+    </div>
+    <div class="input-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter Password" required>
+    </div>
+    <div class="input-group">
+            <label>Confirm Password</label>
+            <input type="password" name="password_confirm" placeholder="Confirm Password" required>
+    </div>
+    <div class="input-group">
+            <button type="submit" name="submit" class="btn">Register</button>
+    </div>
+
+ </form>
+  </div>
+</div>
+<!-- /Modal 2-->
 </html>
