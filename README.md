@@ -26,12 +26,24 @@ UI templates are hosted on Github pages [here](https://samorahno.github.io/i-rep
 - [Mocha](https://mochajs.org/) - A Javascript test framework.
 - [Chai](http://chaijs.com/) - Assertion library.
 
+# API Information
+Heroku [https://samson-ireporter.herokuapp.com/api/v1/](https://samson-ireporter.herokuapp.com/api/v1/)
+| Method | Description | Endpoints |
+| :---: | :---: | :---: |
+| GET | Get all Red-flags | /api/v1/red-flags |
+| GET | Get a redflag |    /api/v1/red-flags/:incident_id |
+| POST | Create a Red-flag | api/v1/red-flags |
+| PATCH | Update Red-flag Comment| api/v1/red-flags/:incident_id/comment|
+| PATCH | Update Red-flag location | api/v1/red-flags/:incident_id/location |
+| DELETE | Delete a Red-flag | api/v1/red-flags/:incident_id |
+
+
 # Installation
 - Install [NodeJs](https://nodejs.org/en/download/).
 - Clone this repository using git clone ```https://github.com/samorahno/i-reporter.git``` .
 - Run ```npm install``` to install all dependencies.
-- Run ```npm run dev``` to start the server.
-- Navigate to ```localhost:3000/api/v1``` in your browser to access the application.
+- Run ```npm start``` to start the server.
+- Navigate to ```localhost:9000/api/v1``` in your browser to access the application.
 
 # Tests
 - The tests were written using Mocha and Mocha-http
