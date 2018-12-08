@@ -28,6 +28,7 @@ UI templates are hosted on Github pages [here](https://samorahno.github.io/i-rep
 
 # API Information
 Heroku [https://samson-ireporter.herokuapp.com/api/v1/](https://samson-ireporter.herokuapp.com/api/v1/)
+
 | Method | Description | Endpoints |
 | :---: | :---: | :---: |
 | GET | Get all Red-flags | /api/v1/red-flags |
