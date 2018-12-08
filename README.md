@@ -30,7 +30,7 @@ UI templates are hosted on Github pages [here](https://samorahno.github.io/i-rep
 - Install [NodeJs](https://nodejs.org/en/download/).
 - Clone this repository using git clone ```https://github.com/samorahno/i-reporter.git``` .
 - Run ```npm install``` to install all dependencies.
-- Run ```npm start``` to start the server.
+- Run ```npm run dev``` to start the server.
 - Navigate to ```localhost:3000/api/v1``` in your browser to access the application.
 
 # Tests
