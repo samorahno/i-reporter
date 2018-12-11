@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
 });
 
 pool.on('connect', () => {
@@ -13,10 +13,11 @@ pool.on('connect', () => {
 
 /**
  * Create Tables
+ * @returns {object} object
  */
 const createRedFlagTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
-  red-flags(
+  redflags(
     id UUID PRIMARY KEY,
     sender_id UUID NOT NULL,
     title VARCHAR(300) NOT NULL,
@@ -24,6 +25,7 @@ const createRedFlagTable = () => {
     location VARCHAR(300) NOT NULL,
     culprits VARCHAR(300) NOT NULL,
     created_date TIMESTAMP,
+    modified_date TIMESTAMP,
     status VARCHAR(40) NOT NULL,
     FOREIGN KEY (sender_id) REFERENCES users (id) ON DELETE CASCADE
   )`;
@@ -37,13 +39,14 @@ const createRedFlagTable = () => {
       console.log(err);
       pool.end();
     });
-}
+};
 
 /**
  * Drop Tables
+ * @returns {object} object
  */
 const dropRedFlagTable = () => {
-  const queryText = 'DROP TABLE IF EXISTS red-flags';
+  const queryText = 'DROP TABLE IF EXISTS redflags';
   pool.query(queryText)
     .then((res) => {
       console.log(res);
@@ -53,10 +56,11 @@ const dropRedFlagTable = () => {
       console.log(err);
       pool.end();
     });
-}
+};
 
 /**
  * Intervention Table
+ * @returns {object} object
 */
 
 const createInterventionTable = () => {
@@ -68,6 +72,7 @@ const createInterventionTable = () => {
     type VARCHAR(200) NOT NULL,
     location VARCHAR(300) NOT NULL,
     created_date TIMESTAMP,
+    modified_date TIMESTAMP,
     status VARCHAR(40) NOT NULL,
     FOREIGN KEY (sender_id) REFERENCES users (id) ON DELETE CASCADE
   )`;
@@ -81,10 +86,11 @@ const createInterventionTable = () => {
       console.log(err);
       pool.end();
     });
-}
+};
 
 /**
  * Drop Tables
+ * @returns {object} object
  */
 const dropInterventionTable = () => {
   const queryText = 'DROP TABLE IF EXISTS interventions';
@@ -101,6 +107,7 @@ const dropInterventionTable = () => {
 
 /**
  * Create User Table
+ * @returns {object} object
  */
 const createUserTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
@@ -126,6 +133,7 @@ const createUserTable = () => {
 
 /**
  * Drop User Table
+ * @returns {object} object
  */
 const dropUserTable = () => {
   const queryText = 'DROP TABLE IF EXISTS users';
@@ -143,6 +151,7 @@ const dropUserTable = () => {
 
 /**
  * Create All Tables
+ * @returns {object} object
  */
 const createAllTables = () => {
   createRedFlagTable();
@@ -151,6 +160,7 @@ const createAllTables = () => {
 };
 /**
  * Drop All Tables
+ * @returns {object} object
  */
 const dropAllTables = () => {
   dropRedFlagTable();
@@ -169,6 +179,9 @@ module.exports = {
   createInterventionTable,
   createUserTable,
   createAllTables,
+  dropRedFlagTable,
+  dropInterventionTable,
+  dropUserTable,
   dropAllTables,
 };
 
