@@ -1,6 +1,6 @@
 import corruptioncases from '../models/incidents';
 
-class redFlagsController {
+class RedFlagsController {
   static getAllRedflags(req, res) {
     res.send({
       status: 200,
@@ -136,4 +136,4 @@ class redFlagsController {
     });
   }
 }
-export default redFlagsController;
+export default RedFlagsController;

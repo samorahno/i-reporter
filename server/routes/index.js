@@ -1,10 +1,10 @@
 import express from 'express';
-import validator from '../validation/redFlagValidator';
-import redFlagsController from '../controllers/redflags';
+import Validator from '../validation/redFlagValidator';
+import RedFlagsController from '../controllers/Redflags';
 
 
 const router = express.Router();
-const { validateCreateRedFlag, validateRedFlagComment, validateRedFlagLocation } = validator;
+const { validateCreateRedFlag, validateRedFlagComment, validateRedFlagLocation } = Validator;
 
 const {
   getAllRedflags,
@@ -13,7 +13,7 @@ const {
   deleteARedFlagById,
   editARedFlagComment,
   editARedFlagLocation,
-} = redFlagsController;
+} = RedFlagsController;
 
 router.get('/', getAllRedflags);
 

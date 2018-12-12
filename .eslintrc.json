@@ -10,6 +10,19 @@
       "no-use-before-define": ["error", {
         "variables": false
       }],
+      "valid-jsdoc": ["error", {
+        "requireReturn": true,
+        "requireReturnType": true,
+        "requireParamDescription": false,
+        "requireReturnDescription": true
+      }],
+      "require-jsdoc": ["error", {
+          "require": {
+              "FunctionDeclaration": true,
+              "MethodDefinition": true,
+              "ClassDeclaration": true
+          }
+      }],
       "no-const-assign": "error",
       "no-console": "off",
       "no-this-before-super": "warn",
