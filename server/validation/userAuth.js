@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const userAuthHelper = {
+
   /**
    * Hash Password Method
    * @param {string} password
@@ -10,6 +11,7 @@ const userAuthHelper = {
   hashPassword(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
   },
+
   /**
    * comparePassword
    * @param {string} hashPassword
@@ -19,6 +21,7 @@ const userAuthHelper = {
   comparePassword(hashPassword, password) {
     return bcrypt.compareSync(password, hashPassword);
   },
+
   /**
    * isValidEmail validation method
    * @param {string} email
@@ -27,6 +30,7 @@ const userAuthHelper = {
   isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   },
+
   /**
    * ispassword valid validation method
    * @param {string} password
@@ -36,13 +40,15 @@ const userAuthHelper = {
     if (password.length > 4) return true;
     return false;
   },
+
   /**
    * doesPasswordMatchvalid validation method
    * @param {string} password
+   * @param {string} confirmPassword
    * @returns {Boolean} True or False
    */
-  doesPasswordMatch(password, confrimPassword) {
-    if (password === confrimPassword) return true;
+  doesPasswordMatch(password, confirmPassword) {
+    if (password === confirmPassword) return true;
     return false;
   },
   isWhiteSpace(email, password, confirmPassword) {
@@ -58,6 +64,7 @@ const userAuthHelper = {
       process.env.jwt_privateKey, { expiresIn: '7d' }
     );
     return token;
-  }
+  },
+
 };
 export default userAuthHelper;

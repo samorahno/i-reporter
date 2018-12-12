@@ -43,7 +43,7 @@ const createRedFlagTable = () => {
 
 /**
  * Drop Tables
- * @returns {object} object
+ * @returns {void}
  */
 const dropRedFlagTable = () => {
   const queryText = 'DROP TABLE IF EXISTS redflags';
@@ -90,7 +90,7 @@ const createInterventionTable = () => {
 
 /**
  * Drop Tables
- * @returns {object} object
+ * @returns {void} object
  */
 const dropInterventionTable = () => {
   const queryText = 'DROP TABLE IF EXISTS interventions';
@@ -133,7 +133,7 @@ const createUserTable = () => {
 
 /**
  * Drop User Table
- * @returns {object} object
+ * @returns {void} object
  */
 const dropUserTable = () => {
   const queryText = 'DROP TABLE IF EXISTS users';
@@ -160,7 +160,7 @@ const createAllTables = () => {
 };
 /**
  * Drop All Tables
- * @returns {object} object
+ * @returns {void}
  */
 const dropAllTables = () => {
   dropRedFlagTable();

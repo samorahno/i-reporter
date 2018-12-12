@@ -8,6 +8,7 @@ const pool = new Pool({
 });
 
 export default {
+    
   /**
    * DB Query
    * @param {object} text

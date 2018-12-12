@@ -20,8 +20,6 @@ class Validator {
     if (string.length < 5 || string.length > 350) return false;
     return true;
   }
-  // validate email
-  /* static validateEmail(string) {
-  } */
+  
 }
 export default Validator;

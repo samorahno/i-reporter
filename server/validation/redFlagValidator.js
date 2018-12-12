@@ -7,7 +7,7 @@ const {
   validateLocation,
 } = createGeneralValidator;
 
-export default class validator {
+export default class Validator {
   static validateCreateRedFlag(req, res, next) {
     const {
       title,

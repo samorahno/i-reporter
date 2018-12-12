@@ -19,8 +19,6 @@ app.use('/api/v1/red-flags', redFlagsRoute);
 app.use('/api/v1/auth', userAuthRoutes);
 
 app.get('*', (req, res) => res.status(404).send({ message: 'Page not found. Please visit /api/v1' }));
-/* const port = process.env.port || 3000;
-app.listen(port, () => console.log(`app running on port ${port}`)); */
 
 const port = 9000;
 

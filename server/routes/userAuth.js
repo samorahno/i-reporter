@@ -1,11 +1,13 @@
 import express from 'express';
-import userAuthControllerClass from '../controllers/userAuthController';
+import UserAuthController from '../controllers/UserAuthController';
+import ValidateCreateUser from '../validation/ValidateCreateUser';
 
-const { createUser } = userAuthControllerClass;
+const { createUser } = UserAuthController;
+const { validateCreate } = ValidateCreateUser;
 
 const router = express.Router();
 
-// http://localhost:9000/api/v1/auth/signup
-router.post('/signup', createUser);
+
+router.post('/signup', validateCreate, createUser);
 
 export default router;
