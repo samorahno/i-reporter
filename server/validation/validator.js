@@ -1,3 +1,4 @@
+
 class Validator {
   static validateString(string) {
     if (!string || string === undefined || string.toString().trim() === '' || typeof string !== 'string') return false;

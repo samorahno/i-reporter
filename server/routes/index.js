@@ -1,6 +1,6 @@
 import express from 'express';
 import Validator from '../validation/incidentValidator';
-import RedFlagsController from '../controllers/Redflags';
+import RedFlagsController from '../controllers/RedFlags';
 import InterventionsController from '../controllers/interventions';
 import verifyTokenObj from '../validation/VerifyToken';
 import VerifyIsAdmin from '../validation/VerifyIsAdmin';
