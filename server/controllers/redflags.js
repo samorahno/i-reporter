@@ -5,7 +5,7 @@ import dba from '../db/index';
 /**
  * Red flag controller
  */
-export default class RedFlagsController {
+class RedFlagsController {
 
   /**
      * Create a red flag
@@ -254,3 +254,4 @@ export default class RedFlagsController {
     }
   }
 }
+module.exports = RedFlagsController;
