@@ -77,7 +77,8 @@ class UserAuthController {
         }
         const token = jwt.sign({ userId: rows[0].id, isAdmin: rows[0].isadmin },
           process.env.jwt_privateKey);
-  
+          
+          
         return res.status(200).header('x-auth-token', token).json({
           status: 200,
           data: [{

@@ -3,29 +3,27 @@ import uuid from 'uuid';
 import dba from '../db/index';
 
 /**
- * Red flag controller
+ * Intervention controller
  */
-export default class RedFlagsController {
-
+export default class InterventionController {
   /**
-     * Create a red flag
-     * @param {object} req request
-     * @param {object} res response
-     * @returns {object} created redflag
-     */
-  static async createRedFlag(req, res) {
+       * Create an intervention
+       * @param {object} req request
+       * @param {object} res response
+       * @returns {object} created intervention
+       */
+  static async createIntervention(req, res) {
     const createQuery = `INSERT INTO 
-      redflags(id, sender_id, title, type, location, comment, culprits, created_date, status)
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`;
+        interventions(id, sender_id, title, type, location, comment, created_date, status)
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8) returning *`;
 
     const values = [
       uuid(),
       req.user.userId,
       req.body.title,
-      'red-flag',
+      'intervention',
       req.body.location,
       req.body.comment,
-      req.body.culprits,
       moment(new Date()),
       'New',
     ];
@@ -36,7 +34,7 @@ export default class RedFlagsController {
         status: 201,
         data: [{
           id: rows[0].id,
-          message: 'Created red-flag record',
+          message: 'Created intervention record',
         }],
       });
     } catch (error) {
@@ -48,15 +46,15 @@ export default class RedFlagsController {
   }
 
   /**
-   * Get all red flag records
+   * Get all Intervention records
    * @param {object} req
    * @param {object} res
-   * @returns {object} redflags
+   * @returns {object} interventions
    */
-  static async getAllRedFlags(req, res) {
+  static async getAllInterventions(req, res) {
     try {
-      const result = await dba.query('SELECT * FROM redflags');
-      return res.status(200).send({
+      const result = await dba.query('SELECT * FROM interventions');
+      return res.status(200).json({
         status: 200,
         data: result.rows,
       });
@@ -68,18 +66,18 @@ export default class RedFlagsController {
     }
   }
 
-  /**
-   * get  A red flag by ID
+/**
+   * get  An Intervention by ID
    * @param {object} req
    * @param {object} res
-   * @returns {object} redflagController object
+   * @returns {object} interventionController object
    */
-  static async getRedFlagById(req, res) {
-    const { redflagid } = req.params;
-    const text = 'SELECT * FROM redflags WHERE id = $1';
+  static async getInterventionById(req, res) {
+    const { interventionid } = req.params;
+    const text = 'SELECT * FROM interventions WHERE id = $1';
 
     try {
-      const { rows } = await dba.query(text, [redflagid]);
+      const { rows } = await dba.query(text, [interventionid]);
       if (req.user.userId !== rows[0].sender_id) {
         res.status(403).send({
           status: 403,
@@ -94,37 +92,37 @@ export default class RedFlagsController {
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error: 'Red-flag record not found',
+        error: 'Intervention record not found',
       });
     }
   }
 
-  /**
-   * Change Red flag status
+/**
+   * Change Intervention status
    * @param {object} req
    * @param {object} res
-   * @returns {object} redflags
+   * @returns {object} interventions
    */
-  static async changeRedFlagStatus(req, res) {
+  static async changeInterventionStatus(req, res) {
     const { status } = req.body;
-    const { redflagid } = req.params;
-    const text = 'UPDATE redflags SET status=$1  WHERE id=$2 RETURNING *';
+    const { interventionid } = req.params;
+    const text = 'UPDATE interventions SET status=$1  WHERE id=$2 RETURNING *';
 
     // eslint-disable-next-line quotes
     if (status === "resolved" || status === "under investigation" || status === "rejected") {
       try {
-        const result = await dba.query(text, [status, redflagid]);
+        const result = await dba.query(text, [status, interventionid]);
         res.status(200).json({
           status: 200,
           data: [{
             id: result.rows[0].id,
-            message: 'Updated red-flag record status',
+            message: 'Updated intervention record status',
           }],
         });
       } catch (error) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: 400,
-          message: 'Red flag record not Found',
+          message: 'Intervention record not Found',
         });
       }
     } else {
@@ -135,21 +133,21 @@ export default class RedFlagsController {
     }
   }
 
-  /**
-   * Change red flag comment
+ /**
+   * Change intervention comment
    * @param {object} req
    * @param {object} res
-   * @returns {object} redflag comment
+   * @returns {object} intervention comment
    */
-  static async changeRedFlagComment(req, res) {
+  static async changeInterventionComment(req, res) {
     const { comment } = req.body;
-    const { redflagid } = req.params;
-    const textid = 'SELECT * FROM redflags WHERE id = $1';
-    const text = 'UPDATE redflags SET comment=$1,modified_date=$2  WHERE id=$3 RETURNING *';
+    const { interventionid } = req.params;
+    const textid = 'SELECT * FROM interventions WHERE id = $1';
+    const text = 'UPDATE interventions SET comment=$1,modified_date=$2  WHERE id=$3 RETURNING *';
 
 
     try {
-      const rowsid = await dba.query(textid, [redflagid]);
+      const rowsid = await dba.query(textid, [interventionid]);
       if (req.user.userId !== rowsid.rows[0].sender_id) {
         return res.status(403).send({
           status: 403,
@@ -159,40 +157,40 @@ export default class RedFlagsController {
       if (rowsid.rows[0].status !== 'New') {
         return res.status(409).send({
           status: 409,
-          message: 'Error, only new Red-flags can be edited',
+          message: 'Error, only new Intervention records can be edited',
         });
       }
-      const result = await dba.query(text, [comment, moment(new Date()), redflagid]);
+      const result = await dba.query(text, [comment, moment(new Date()), interventionid]);
       res.status(200).json({
         status: 200,
         data: [{
           id: result.rows[0].id,
-          message: 'Updated red-flag record’s comment',
+          message: 'Updated intervention record’s comment',
         }],
       });
     } catch (error) {
       return res.status(400).send({
         status: 400,
-        message: 'Red flag record not Found',
+        message: 'intervention record not Found',
       });
     }
   }
 
-  /**
-   * Edit a red flag location
+/**
+   * Edit an intervention location
    * @param {object} req
    * @param {object} res
-   * @returns {object} redflag
+   * @returns {object} intervention
    */
-  static async editARedFlagLocation(req, res) {
+  static async editAnInterventionLocation(req, res) {
     const { location } = req.body;
-    const { redflagid } = req.params;
-    const textid = 'SELECT * FROM redflags WHERE id = $1';
-    const text = 'UPDATE redflags SET location=$1,modified_date=$2  WHERE id=$3 RETURNING *';
+    const { interventionid } = req.params;
+    const textid = 'SELECT * FROM interventions WHERE id = $1';
+    const text = 'UPDATE interventions SET location=$1,modified_date=$2  WHERE id=$3 RETURNING *';
 
 
     try {
-      const rowsid = await dba.query(textid, [redflagid]);
+      const rowsid = await dba.query(textid, [interventionid]);
       if (req.user.userId !== rowsid.rows[0].sender_id) {
         return res.status(403).send({
           status: 403,
@@ -202,54 +200,52 @@ export default class RedFlagsController {
       if (rowsid.rows[0].status !== 'New') {
         return res.status(409).send({
           status: 409,
-          message: 'Error, only new Red-flags can be edited',
+          message: 'Error, only new Interventions can be edited',
         });
       }
-      const result = await dba.query(text, [location, moment(new Date()), redflagid]);
+      const result = await dba.query(text, [location, moment(new Date()), interventionid]);
       res.status(200).json({
         status: 200,
         data: [{
           id: result.rows[0].id,
-          message: 'Updated red-flag record’s location',
+          message: 'Updated intervention record’s location',
         }],
       });
     } catch (error) {
       return res.status(400).send({
         status: 400,
-        message: 'Red flag record not Found',
+        message: 'Intervention record not Found',
       });
     }
   }
 
- 
- 
-    /**
-   * Delete a red flag
+/**
+   * Delete an intervention
    * @param {object} req
    * @param {object} res
-   * @returns {object} redflags
-   */ 
-  static async deleteARedFlagById(req, res) {
-    const deleteQuery = 'DELETE FROM redflags WHERE id=$1 returning *';
+   * @returns {object} interventions
+   */
+  static async deleteAnInterventionById(req, res) {
+    const deleteQuery = 'DELETE FROM interventions WHERE id=$1 returning *';
     try {
-      const { rows } = await dba.query(deleteQuery, [req.params.redflagid]);
+      const { rows } = await dba.query(deleteQuery, [req.params.interventionid]);
       if (!rows[0]) {
         return res.status(404).send({
           status: 400,
-          message: 'Red-flag record not found',
+          message: 'Intervention record not found',
         });
       }
       return res.status(202).json({
         status: 202,
         data: [{
           id: rows[0].id,
-          message: 'red-flag record has been deleted',
+          message: 'intervention record has been deleted',
         }],
       });
     } catch (error) {
       return res.status(400).send({
         status: 400,
-        message: 'Error Deleting Red-flag..',
+        message: 'Error Deleting Intervention..',
       });
     }
   }

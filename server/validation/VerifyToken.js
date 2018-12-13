@@ -7,12 +7,12 @@ const verifyTokenObj = {
    * @param {object} req
    * @param {object} res
    * @param {object} next
-   * @returns {void}
+   * @returns {object} token
    */
   async verifyToken(req, res, next) {
     const token = req.headers['x-access-token'];
     if (!token) {
-      return res.status(401).send({ message: 'Token is not provided' });
+      return res.status(401).json({ message: 'Token is not provided' });
     }
     try {
       const decoded = await jwt.verify(token, process.env.jwt_privateKey);

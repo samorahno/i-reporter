@@ -47,6 +47,7 @@ export default class Validator {
     return next();
   }
 
+
   static validateRedFlagComment(req, res, next) {
     const {
       comment,
@@ -71,7 +72,7 @@ export default class Validator {
     const {
       location,
     } = req.body;
-    if (!validateLocation(location)) {
+    if (!location || !validateLocation(location)) {
       return res.status(400).send({
         status: 400,
         error: 'Please enter a Location',
@@ -79,4 +80,47 @@ export default class Validator {
     }
     return next();
   }
+
+  static validateInterventionLocation(req, res, next) {
+    const {
+      location,
+    } = req.body;
+    if (!location || !validateLocation(location)) {
+      return res.status(400).send({
+        status: 400,
+        error: 'Please enter a Location',
+      });
+    }
+    return next();
+  }
+
+  static validateCreateIntervention(req, res, next) {
+    const {
+      title,
+      comment,
+      location,
+    } = req.body;
+    if (!validateString(title)) {
+      return res.status(400).send({
+        status: 400,
+        error: 'enter a title for intervention',
+      });
+    }
+    
+    if (!location || !validateString(location)) {
+      return res.status(400).send({
+        status: 400,
+        error: 'Please enter a Location',
+      });
+    }
+
+    if (!comment || !validateString(comment)) {
+      return res.status(400).send({
+        status: 400,
+        error: 'Please enter Comment',
+      });
+    }
+    return next();
+  }
+
 }
