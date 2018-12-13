@@ -2,7 +2,6 @@
 import moment from 'moment';
 import uuid from 'uuid';
 import jwt from 'jsonwebtoken';
-import db from '../db/tables';
 import dba from '../db/index';
 import userAuthHelper from '../validation/userAuth';
 
@@ -39,6 +38,7 @@ class UserAuthController {
         moment(new Date()),
       ];
 
+      
 
       try {
         const { rows } = await dba.query(createQuery, values);
@@ -60,5 +60,40 @@ class UserAuthController {
       }
     }
 
+/**
+     * Login a user
+     * @param {object} req
+     * @param {object} res
+     * @returns {object} user object
+     */
+    static async login(req, res) {
+      const text = 'SELECT * FROM users WHERE email = $1';
+      try {
+        const { rows } = await dba.query(text, [req.body.email]);
+        if (!rows[0]) {
+          return res.status(401).send({ status: 401, message: 'Invalid Email / Password' });
+        }
+        if (!userAuthHelper.comparePassword(rows[0].password, req.body.password)) {
+          return res.status(401).send({ status: 401, message: 'The credentials you provided Are incorrect' });
+        }
+        const token = jwt.sign({ userId: rows[0].id, isAdmin: rows[0].isadmin },
+          process.env.jwt_privateKey);
+          
+          
+        return res.status(200).header('x-auth-token', token).json({
+          status: 200,
+          data: [{
+            token,
+            user: rows[0],
+            message: `Welcome ${rows[0].fullname}`,
+          }],
+        });
+      } catch (error) {
+        return res.status(400).json({
+          error: 400,
+          message: 'incorrect credentials',
+        });
+      }
+    }
 }
 export default UserAuthController;

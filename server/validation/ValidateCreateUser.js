@@ -37,6 +37,27 @@ class ValidateCreateUser {
 
     next();
   }
+
+  /**
+     * Create A User
+     * @param {object} req
+     * @param {object} res
+     * @param {object} next
+     * @returns {object} response object
+     */
+  static validateLogin(req, res, next) {
+    if (!req.body.email || !req.body.password) {
+      return res.status(401).send({ status: 401, message: 'Some values are missing' });
+    }
+    if (!userAuthHelper.isValidEmail(req.body.email)) {
+      return res.status(401).send({ status: 401, message: 'Please enter a valid email address' });
+    }
+    if (!userAuthHelper.ispasswordValid(req.body.password)) {
+      return res.status(401).send({ status: 401, error: 'Password Must Be at least Five Characters' });
+    }
+
+    next();
+  }
 }
 
 export default ValidateCreateUser;
