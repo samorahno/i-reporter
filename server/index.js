@@ -22,6 +22,7 @@ app.use('/api/v1/auth', userAuthRoutes);
 
 app.get('*', (req, res) => res.status(404).send({ message: 'Page not found. Please visit /api/v1' }));
 
+
 const port = 9000;
 
 app.listen(process.env.PORT || `${port}`, () => console.log(`Server started at localhost ${port}`));
