@@ -1,3 +1,4 @@
+/* eslint-disable */
 import createGeneralValidator from './validator';
 
 const {
