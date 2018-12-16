@@ -45,11 +45,17 @@ class UserAuthController {
          const token = jwt.sign({ userId: rows[0].id, isAdmin: rows[0].isadmin },
           process.env.jwt_privateKey,
           { expiresIn: '7d' });
+          const userObj = {
+              id: rows[0].id,
+              fullname: rows[0].fullname,
+              email: rows[0].email,
+              created_date: rows[0].created_date,
+          };
         return res.status(201).header('x-auth-token', token).json({
           status: 201,
           data: [{
             token,
-            user: rows[0],
+            user: userObj,
           }],
         });
       } catch (error) {
