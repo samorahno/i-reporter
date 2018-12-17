@@ -6,12 +6,10 @@ import app from '../index';
 
 dotenv.config();
 
-
-
 chai.use(chaiHttp);
-const userToken = jwt.sign({ id: 'ae235fe0-37d6-4c26-9006-e4e47d579f70', isAdmin: 'false' }, process.env.jwt_privateKey, {
-  expiresIn: '7d', // expires in 7 days
-});
+// const userToken = jwt.sign({ id: 'ae235fe0-37d6-4c26-9006-e4e47d579f70', isAdmin: 'false' }, process.env.jwt_privateKey, {
+//  expiresIn: '7d', // expires in 7 days
+// });
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNjg0NTBjYS1kNjMzLTQwM2QtOTdmOC05N2ZhN2JmNTUwMWQiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTQ0NzM4NTEwfQ.GBhNVMWUDP6pairm6fsCer-Fi67KitFr9Ohn8lBpcso';
 
 const userRecord = {
