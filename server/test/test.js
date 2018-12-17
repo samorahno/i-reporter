@@ -83,11 +83,11 @@ describe(' POST /auth', () => {
 	      password: 'bimbo',
       })
       .end((err, res) => {
-        expect(res).have.status(200);
+        expect(res).have.status(400);
         expect(res.body).to.be.an('object');
        // expect(res.body).to.have.property('status');
        // expect(res.body.status).to.be.a('number');
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(400);
         done();
       });
   });
